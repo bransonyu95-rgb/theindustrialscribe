@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Industrial Scribe | AI Automation for Manufacturing Professionals</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Cabin:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-light: #f8fbff;
+      --bg-white: #ffffff;
+      --text: #1e293b;
+      --text-light: #64748b;
+      --primary-blue: #2563eb;
+      --primary-blue-dark: #1e40af;
+      --primary-blue-light: #dbeafe;
+      --trust-blue: #0ea5e9;
+      --trust-blue-soft: #e0f2fe;
+      --success-green: #10b981;
+      --success-green-soft: #d1fae5;
+      --border: #e2e8f0;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'DM Sans', sans-serif; background: var(--bg-light); color: var(--text); line-height: 1.7; }
+
+    /* NAV */
+    nav { padding: 1.5rem 5%; background: var(--bg-white); border-bottom: 2px solid var(--border); position: sticky; top: 0; z-index: 100; }
+    .nav-container { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-family: 'Cabin', sans-serif; font-size: 1.4rem; font-weight: 700; color: var(--text); text-decoration: none; }
+    .logo span { color: var(--primary-blue); }
+    .nav-links { display: flex; gap: 2rem; list-style: none; align-items: center; }
+    .nav-links a { color: var(--text-light); text-decoration: none; font-weight: 500; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--primary-blue); }
+    .simple-button { background: var(--primary-blue); color: white; padding: 0.7rem 1.5rem; border-radius: 8px; text-decoration: none; font-weight: 600; transition: all 0.2s; border: none; cursor: pointer; font-family: 'DM Sans', sans-serif; font-size: 1rem; }
+    .simple-button:hover { background: var(--primary-blue-dark); transform: translateY(-2px); box-shadow: 0 4px 12px rgba(37,99,235,0.3); }
+
+    /* HERO */
+    .hero { padding: 4rem 5% 3rem; max-width: 1200px; margin: 0 auto; position: relative; overflow: hidden; }
+    .hero::before { content: ''; position: absolute; top: -50%; right: -20%; width: 600px; height: 600px; background: radial-gradient(circle, rgba(37,99,235,0.08), transparent 70%); border-radius: 50%; animation: float 20s ease-in-out infinite; }
+    .hero::after { content: ''; position: absolute; bottom: -30%; left: -10%; width: 500px; height: 500px; background: radial-gradient(circle, rgba(14,165,233,0.06), transparent 70%); border-radius: 50%; animation: float 15s ease-in-out infinite reverse; }
+    @keyframes float { 0%,100% { transform: translate(0,0) scale(1); } 50% { transform: translate(30px,-30px) scale(1.1); } }
+    .hero-badge { display: inline-block; background: var(--primary-blue-light); color: var(--primary-blue-dark); padding: 0.5rem 1.2rem; border-radius: 20px; font-size: 0.9rem; font-weight: 600; margin-bottom: 1.5rem; position: relative; z-index: 1; }
+    h1 { font-family: 'Cabin', sans-serif; font-size: clamp(2.5rem, 6vw, 4rem); font-weight: 700; line-height: 1.2; margin-bottom: 1.5rem; color: var(--text); position: relative; z-index: 1; }
+    .highlight { color: var(--primary-blue); position: relative; display: inline-block; }
+    .highlight::after { content: ''; position: absolute; bottom: -4px; left: 0; right: 0; height: 12px; background: var(--primary-blue-light); z-index: -1; transform: skewX(-12deg); opacity: 0.7; }
+    .hero-text { font-size: clamp(1.05rem, 2vw, 1.2rem); color: var(--text-light); margin-bottom: 2.5rem; max-width: 700px; position: relative; z-index: 1; }
+    .members-preview { display: flex; align-items: center; gap: 1rem; margin: 2rem 0; padding: 1.5rem; background: var(--trust-blue-soft); border-radius: 12px; max-width: 540px; border: 2px solid var(--trust-blue); position: relative; z-index: 1; }
+    .member-text { font-size: 0.95rem; color: var(--text-light); }
+    .founding-dot { width: 10px; height: 10px; background: var(--success-green); border-radius: 50%; display: inline-block; margin-right: 6px; animation: pulse-dot 2s ease-in-out infinite; }
+    @keyframes pulse-dot { 0%,100% { opacity: 1; } 50% { opacity: 0.4; } }
+
+    /* CASUAL NOTE */
+    .casual-note { background: var(--success-green-soft); border-left: 4px solid var(--success-green); padding: 1.5rem 1.5rem 1.5rem 1.8rem; border-radius: 8px; margin: 2rem 0; position: relative; overflow: hidden; z-index: 1; }
+    .casual-note::before { content: '🔒'; position: absolute; right: 1rem; top: 50%; transform: translateY(-50%); font-size: 3rem; opacity: 0.15; }
+    .casual-note p { color: var(--text); font-size: 1.05rem; }
+
+    /* SECTIONS */
+    .section { padding: 4rem 5%; max-width: 1200px; margin: 0 auto; }
+    .section-intro { margin-bottom: 3rem; }
+    .section-intro h2 { font-family: 'Cabin', sans-serif; font-size: clamp(2rem, 4vw, 2.8rem); margin-bottom: 1rem; color: var(--text); }
+    .section-intro p { font-size: 1.15rem; color: var(--text-light); max-width: 640px; }
+    .warm-bg { background: var(--bg-white); }
+
+    /* CARDS */
+    .simple-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+    .friendly-card { background: white; padding: 2rem; border-radius: 12px; border: 2px solid var(--border); transition: all 0.3s cubic-bezier(0.4,0,0.2,1); }
+    .friendly-card:hover { transform: translateY(-8px) scale(1.02); border-color: var(--primary-blue); box-shadow: 0 12px 40px rgba(37,99,235,0.15); }
+    .friendly-card:hover .card-emoji { transform: scale(1.2) rotate(5deg); }
+    .card-emoji { font-size: 2.5rem; margin-bottom: 1rem; display: inline-block; transition: transform 0.3s ease; }
+    .card-title { font-family: 'Cabin', sans-serif; font-size: 1.3rem; font-weight: 700; margin-bottom: 0.8rem; color: var(--text); }
+    .card-text { color: var(--text-light); line-height: 1.7; margin-bottom: 1.2rem; font-size: 0.97rem; }
+    .card-list { list-style: none; }
+    .card-list li { padding: 0.5rem 0; color: var(--text-light); display: flex; align-items: flex-start; font-size: 0.93rem; }
+    .card-list li:before { content: "→"; color: var(--primary-blue); font-weight: 700; margin-right: 0.5rem; flex-shrink: 0; }
+
+    /* QUOTE SECTION */
+    .quote-section { padding: 3rem 5%; background: var(--bg-white); border-top: 2px solid var(--border); border-bottom: 2px solid var(--border); }
+    .quote-inner { max-width: 900px; margin: 0 auto; text-align: center; }
+    .quote-box { background: var(--primary-blue-light); border-left: 4px solid var(--primary-blue); padding: 2rem 2.5rem; border-radius: 12px; }
+    .quote-box blockquote { font-size: clamp(1.2rem, 3vw, 1.7rem); font-weight: 600; color: var(--text); line-height: 1.5; margin-bottom: 1.5rem; }
+    .quote-attribution { display: flex; align-items: center; justify-content: center; gap: 1rem; flex-wrap: wrap; }
+    .quote-avatar { width: 50px; height: 50px; border-radius: 50%; background: var(--primary-blue); display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; font-size: 1.1rem; }
+    .quote-attribution-text { text-align: left; }
+    .quote-attribution-text strong { display: block; font-weight: 600; color: var(--text); }
+    .quote-attribution-text span { font-size: 0.9rem; color: var(--text-light); }
+    .quote-commentary { margin-top: 2rem; font-size: 1rem; color: var(--text-light); line-height: 1.9; text-align: left; }
+    .quote-commentary p + p { margin-top: 1rem; }
+
+    /* SOCIAL PROOF */
+    .proof-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-top: 2rem; }
+    .proof-card { background: white; padding: 1.8rem; border-radius: 12px; border: 2px solid var(--border); }
+    .proof-card strong { display: block; font-family: 'Cabin', sans-serif; font-size: 1.1rem; color: var(--text); margin-bottom: 0.6rem; }
+    .proof-card p { color: var(--text-light); font-size: 0.95rem; line-height: 1.7; }
+    .proof-arrow { color: var(--primary-blue); font-weight: 700; margin-right: 0.4rem; }
+
+    /* PRICING */
+    .pricing-box { max-width: 560px; margin: 3rem auto; background: white; padding: 3rem; border-radius: 16px; border: 3px solid var(--primary-blue); text-align: center; box-shadow: 0 4px 20px rgba(37,99,235,0.15); }
+    .pricing-label { background: var(--primary-blue-light); color: var(--primary-blue-dark); padding: 0.5rem 1.2rem; border-radius: 20px; display: inline-block; font-weight: 600; margin-bottom: 1.5rem; animation: shimmer 3s ease-in-out infinite; }
+    @keyframes shimmer { 0%,100% { box-shadow: 0 0 0 rgba(37,99,235,0); } 50% { box-shadow: 0 0 20px rgba(37,99,235,0.3); } }
+    .big-price { font-family: 'Cabin', sans-serif; font-size: 4rem; font-weight: 700; color: var(--primary-blue); line-height: 1; }
+    .price-strike { font-size: 1.1rem; color: var(--text-light); text-decoration: line-through; margin-top: 0.5rem; }
+    .price-note { color: var(--text-light); margin: 0.5rem 0 2rem; font-size: 0.95rem; }
+    .feature-list { text-align: left; list-style: none; margin: 2rem 0; }
+    .feature-list li { padding: 0.8rem 0; border-bottom: 1px solid var(--border); display: flex; gap: 0.8rem; align-items: flex-start; font-size: 0.97rem; }
+    .feature-list li:last-child { border-bottom: none; }
+    .checkmark { color: var(--success-green); font-weight: 700; font-size: 1.1rem; flex-shrink: 0; }
+
+    /* FAQ */
+    .faq-item { background: white; padding: 1.8rem; border-radius: 12px; border: 2px solid var(--border); margin-bottom: 1.5rem; transition: all 0.3s ease; }
+    .faq-item:hover { border-color: var(--primary-blue); transform: translateX(4px); box-shadow: -4px 4px 16px rgba(37,99,235,0.1); }
+    .faq-q { font-family: 'Cabin', sans-serif; font-size: 1.2rem; font-weight: 700; margin-bottom: 0.8rem; color: var(--text); }
+    .faq-a { color: var(--text-light); line-height: 1.8; font-size: 0.97rem; }
+
+    /* FOOTER */
+    footer { background: var(--bg-white); padding: 3rem 5% 2rem; border-top: 2px solid var(--border); margin-top: 4rem; }
+    .footer-content { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; margin-bottom: 2rem; }
+    .footer-section h4 { font-family: 'Cabin', sans-serif; margin-bottom: 1rem; color: var(--text); }
+    .footer-section ul { list-style: none; }
+    .footer-section li { margin-bottom: 0.5rem; }
+    .footer-section a { color: var(--text-light); text-decoration: none; }
+    .footer-section a:hover { color: var(--primary-blue); }
+    .footer-bottom { max-width: 1200px; margin: 0 auto; text-align: center; padding-top: 2rem; border-top: 1px solid var(--border); color: var(--text-light); font-size: 0.9rem; }
+
+    /* FINAL CTA */
+    .final-cta { text-align: center; padding: 5rem 5%; }
+    .final-cta h2 { font-family: 'Cabin', sans-serif; font-size: clamp(2rem, 4vw, 2.8rem); margin-bottom: 1rem; }
+    .final-cta p { color: var(--text-light); font-size: 1.1rem; max-width: 600px; margin: 0 auto 2rem; }
+    .final-note { margin-top: 1.5rem; color: var(--text-light); font-size: 0.95rem; font-style: italic; }
+
+    /* MOBILE */
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      h1 { font-size: 2.2rem; }
+      .simple-grid, .proof-grid { grid-template-columns: 1fr; }
+      .section { padding: 3rem 5%; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-container">
+    <a href="#" class="logo">The Industrial <span>Scribe</span></a>
+    <ul class="nav-links">
+      <li><a href="#how">How It Works</a></li>
+      <li><a href="#learn">What You'll Learn</a></li>
+      <li><a href="#pricing">Pricing</a></li>
+      <li><a href="#pricing" class="simple-button">Claim My Spot</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-badge">🏭 Built for Manufacturing Professionals — Not Office Workers</div>
+  <h1>
+    Your RCA Doesn't<br>
+    Write Itself.<br>
+    <span class="highlight">But It Could.</span>
+  </h1>
+  <p class="hero-text">
+    The Industrial Scribe is the only AI automation community built specifically for manufacturing professionals in SEA — Production Planners, QC Executives, BD Managers, and Operations Managers who are tired of spending half their day on work a machine could do in minutes.<br><br>
+    Built by a practitioner with 15+ years across CNC, contract manufacturing, and business development. Not a tech influencer. Someone who's actually sat with a non-conformance report at 11pm and wished there was a faster way.
+  </p>
+  <a href="#pricing" class="simple-button" style="font-size: 1.1rem; padding: 1rem 2rem; display: inline-block; text-decoration: none;">Claim My Founding Member Spot</a>
+
+  <div class="members-preview">
+    <div class="member-text">
+      <strong><span class="founding-dot"></span>Founding memberships are open now</strong><br>
+      <span>Early cohort kept small on purpose. The RM 89/month rate locks in for life — when we hit capacity, it goes up. Be part of the first wave.</span>
+    </div>
+  </div>
+
+  <div class="casual-note">
+    <p>
+      <strong>A quick note before you scroll further.</strong><br><br>
+      This community is built with one rule: what you share here stays here.<br><br>
+      Manufacturing is a small world. Your customers have NDAs. Your competitors are sometimes your customers. Your boss doesn't need to know you're automating your own job before you're ready.<br><br>
+      So everything in The Industrial Scribe is <strong>anonymous-safe</strong>. No real company names required. No pressure to reveal your employer. Share your actual NCR problem, your messy SOP situation, your costing headache — and get real help without the exposure risk.<br><br>
+      B2B manufacturing culture runs on trust and confidentiality. We built this community around that reality, not despite it.<br><br>
+      Lah, that's just how it should be.
+    </p>
+  </div>
+</section>
+
+<!-- QUOTE -->
+<div class="quote-section">
+  <div class="quote-inner">
+    <div class="quote-box">
+      <blockquote>"You're not going to lose your job to an AI, but you're going to lose your job to <span style="color: var(--primary-blue);">someone who uses AI.</span>"</blockquote>
+      <div class="quote-attribution">
+        <div class="quote-avatar">JH</div>
+        <div class="quote-attribution-text">
+          <strong>Jensen Huang</strong>
+          <span>NVIDIA CEO · May 2025</span>
+        </div>
+      </div>
+    </div>
+    <div class="quote-commentary">
+      <p>Right now, somewhere in a factory in Johor or Penang, a Production Planner is copying data from the ERP into an Excel sheet. Manually. Again. A QC Executive is drafting an RCA in Word, typing the same 5C+1M structure they've typed a hundred times before. A Purchasing Executive is building a cost comparison table, row by row, for the third time this month.</p>
+      <p>This isn't a criticism. This is the job as most of us know it.</p>
+      <p>But here's the thing: AI doesn't care that you've been doing it that way for 10 years. It will do it in 3 minutes regardless. The only variable is whether <em>you're</em> the one using it — or the one being replaced by someone who is.</p>
+      <p>The Industrial Scribe exists for the person who wants to be on the right side of that equation.</p>
+    </div>
+  </div>
+</div>
+
+<!-- HOW IT WORKS -->
+<section class="section warm-bg" id="how">
+  <div class="section-intro">
+    <h2>Here's how it works</h2>
+    <p>No theory. No 40-slide decks. Just real automation for real manufacturing work.</p>
+  </div>
+  <div class="simple-grid">
+    <div class="friendly-card">
+      <div class="card-emoji">🗓️</div>
+      <h3 class="card-title">Week 1 — You Get Your First Win</h3>
+      <p class="card-text">We start with whatever takes up the most of your time right now. Production summary reports that eat your Monday mornings? NCR response drafts that pile up? Customer quotations you're rebuilding from scratch every time?</p>
+      <p class="card-text">Pick one. We automate it together. You'll see what AI can do for your specific role — not a generic demo, your actual work.</p>
+    </div>
+    <div class="friendly-card">
+      <div class="card-emoji">🛠️</div>
+      <h3 class="card-title">Weeks 2–4 — You Build the Stack</h3>
+      <p class="card-text">Week by week, you layer in more automation: RCA templates that generate structured reports from your notes, SOP drafts from process descriptions, costing models for margin simulation, production planning tools that turn WIP data into presentable summaries.</p>
+      <p class="card-text">You're not learning AI in the abstract. You're building tools for your actual job.</p>
+    </div>
+    <div class="friendly-card">
+      <div class="card-emoji">🚀</div>
+      <h3 class="card-title">After That — You're the One Who Knows</h3>
+      <p class="card-text">Once you understand how to build one automated workflow, you start seeing possibilities everywhere. And you become genuinely valuable to your team — because you're the person who knows how to build these things.</p>
+      <p class="card-text">In a manufacturing SME, that's not a small thing.</p>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT YOU'LL LEARN -->
+<section class="section" id="learn">
+  <div class="section-intro">
+    <h2>What you'll actually learn</h2>
+    <p>Manufacturing-specific. Role-specific. Immediately applicable.</p>
+  </div>
+  <div class="simple-grid">
+    <div class="friendly-card">
+      <div class="card-emoji">⚙️</div>
+      <h3 class="card-title">Production & Planning Automation</h3>
+      <p class="card-text">Turn your WIP data, scheduling updates, and production logs into clean, shareable summaries — automatically. Stop manually compiling what the ERP already knows.</p>
+      <ul class="card-list">
+        <li>Auto-generate weekly production reports</li>
+        <li>Convert raw scheduling data into visual dashboards</li>
+        <li>Build capacity planning tools for your line</li>
+      </ul>
+    </div>
+    <div class="friendly-card">
+      <div class="card-emoji">🔍</div>
+      <h3 class="card-title">Quality & Compliance</h3>
+      <p class="card-text">RCA, NCR, CAPA, SOP — the paperwork never stops. Draft, structure, and format all of it in a fraction of the time, without cutting corners on the logic.</p>
+      <ul class="card-list">
+        <li>Generate structured RCA reports from bullet-point notes</li>
+        <li>Draft NCR responses with proper 8D or 5-Why formatting</li>
+        <li>Create SOP templates that actually get used on the floor</li>
+      </ul>
+    </div>
+    <div class="friendly-card">
+      <div class="card-emoji">💰</div>
+      <h3 class="card-title">Costing & Commercial</h3>
+      <p class="card-text">Quotations, margin simulations, cost breakdowns — automate the repetitive parts without losing the judgment that makes the numbers meaningful.</p>
+      <ul class="card-list">
+        <li>Build quotation tools that pre-fill standard costs</li>
+        <li>Run "what-if" margin simulations before committing</li>
+        <li>Generate professional costing proposals at speed</li>
+      </ul>
+    </div>
+    <div class="friendly-card">
+      <div class="card-emoji">📊</div>
+      <h3 class="card-title">Reporting & Data</h3>
+      <p class="card-text">Most manufacturing reports are built the same way: pull data, format manually, send before the meeting. Collapse that process down to minutes.</p>
+      <ul class="card-list">
+        <li>Automated weekly/monthly report templates</li>
+        <li>Turn raw ERP exports into readable summaries</li>
+        <li>Dashboards your management team will actually look at</li>
+      </ul>
+    </div>
+    <div class="friendly-card">
+      <div class="card-emoji">🔧</div>
+      <h3 class="card-title">Workflow Builder</h3>
+      <p class="card-text">The most powerful skill here isn't any single tool — it's knowing how to build your own automation for your specific job. We teach the logic, not just the clicks.</p>
+      <ul class="card-list">
+        <li>Map your manual workflows and identify automation gaps</li>
+        <li>Build custom AI tools tailored to your role</li>
+        <li>Prompt engineering the way a manufacturing person thinks</li>
+      </ul>
+    </div>
+    <div class="friendly-card">
+      <div class="card-emoji">🤝</div>
+      <h3 class="card-title">Community & Knowledge Bank</h3>
+      <p class="card-text">You know things that can't be Googled. So does everyone else in here. The knowledge bank is where real manufacturing experience gets shared — anonymously, safely, without exposing your company.</p>
+      <ul class="card-list">
+        <li>Ask real questions about real work problems</li>
+        <li>Share what works without revealing your employer</li>
+        <li>Templates, prompts, and workflows built for manufacturing</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- SOCIAL PROOF / FOUNDING MEMBER -->
+<section class="section warm-bg">
+  <div class="section-intro">
+    <h2>Why manufacturing professionals are joining first</h2>
+    <p>We're not going to fake this with testimonials we don't have yet. This is a new community — and that's actually the point.</p>
+  </div>
+  <div class="proof-grid">
+    <div class="proof-card">
+      <strong><span class="proof-arrow">→</span> The founding rate locks in for life</strong>
+      <p>RM 89/month doesn't change once you're in. When we raise the price (and we will), your rate stays the same. That's not a marketing trick — it's how we reward the people who believed in this before it was obvious.</p>
+    </div>
+    <div class="proof-card">
+      <strong><span class="proof-arrow">→</span> You help shape what this becomes</strong>
+      <p>Early members influence what we build next. Your workflows, your pain points, your role-specific problems become the curriculum. This isn't a static course — it's built around the people in it.</p>
+    </div>
+    <div class="proof-card">
+      <strong><span class="proof-arrow">→</span> Built for your industry specifically</strong>
+      <p>No generic AI content. No "productivity hacks for entrepreneurs." Everything here is manufacturing — the terminology, the workflows, the examples. If you've sat through a generic AI webinar and thought "this has nothing to do with my job," you'll feel the difference immediately.</p>
+    </div>
+    <div class="proof-card">
+      <strong><span class="proof-arrow">→</span> Anonymity is the default, not an afterthought</strong>
+      <p>Share a real NCR problem, a costing challenge, a difficult customer situation — nobody outside this community will know it was you. Built for B2B manufacturing culture. Confidentiality respected.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="section" id="pricing">
+  <div class="section-intro" style="text-align: center;">
+    <h2>Simple pricing. No surprises.</h2>
+    <p style="max-width: 100%;">One plan. Everything included. Lock in the founding rate before it closes.</p>
+  </div>
+  <div class="pricing-box">
+    <div class="pricing-label">🏭 FOUNDING MEMBER RATE</div>
+    <div class="big-price">RM 89<span style="font-size: 1.5rem; color: var(--text-light);">/mo</span></div>
+    <div class="price-strike">RM 149/month after founding period</div>
+    <p class="price-note">Founding rate locked in for as long as you stay.</p>
+    <ul class="feature-list">
+      <li><span class="checkmark">✓</span> Full community access — all discussions, templates, and knowledge bank</li>
+      <li><span class="checkmark">✓</span> Weekly automation tutorials built for manufacturing workflows</li>
+      <li><span class="checkmark">✓</span> Role-specific content tracks: QC, Production, Purchasing, BD, Operations</li>
+      <li><span class="checkmark">✓</span> Live Q&A sessions where you bring your actual work problems</li>
+      <li><span class="checkmark">✓</span> Prompt library and templates for RCA, NCR, SOP, costing, reporting</li>
+      <li><span class="checkmark">✓</span> Anonymous-safe sharing — post real challenges without exposing your company</li>
+      <li><span class="checkmark">✓</span> Cancel anytime. No lock-in. No penalty.</li>
+    </ul>
+    <a href="#" class="simple-button" style="width: 100%; font-size: 1.1rem; padding: 1rem; display: block; text-align: center; text-decoration: none;">Claim My Founding Member Spot</a>
+    <p style="margin-top: 1.5rem; color: var(--text-light); font-size: 0.92rem;">
+      Not sure yet? Join for one month. Build one automation. If you can't point to at least one thing in your job that's faster or easier — cancel. Fair enough, kan?
+    </p>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section warm-bg">
+  <div class="section-intro">
+    <h2>Questions you probably have</h2>
+    <p>Honest answers. No sales spin.</p>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q">I've never used AI before. Will this actually work for me?</div>
+    <div class="faq-a">Yes — and honestly, this is better for you than for someone who's been dabbling randomly for a year. We start from how manufacturing actually works, not from how AI tools are marketed. You don't need to know what an LLM is. You need to know what your job involves — and you already do. We handle the translation.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q">Is this confidential? Can I share real work problems here?</div>
+    <div class="faq-a">This is the question we get most, and it's the right one to ask. The community is closed — no public posts, no LinkedIn sharing, no screenshots circulated outside. You're not required to name your employer, your customers, or your products. Most members share problems at the process level without revealing anything proprietary. B2B manufacturing runs on NDAs and confidentiality. We built The Industrial Scribe around that reality.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q">I'm a QC Executive / Production Planner / Purchasing Executive — is this relevant for my specific role?</div>
+    <div class="faq-a">Yes. We have content tracks built around specific manufacturing roles. QC content covers RCA, CAPA, NCR, SOP, audit prep. Production content covers WIP reporting, scheduling tools, capacity summaries. Purchasing content covers supplier comparison, cost tracking, and quotation management. BD content covers costing models, proposal writing, and margin simulation. If your role involves repetitive document work, data compilation, or report writing — there's something here for you.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q">How is this different from just using ChatGPT on my own?</div>
+    <div class="faq-a">ChatGPT doesn't know what a PFMEA is. It doesn't understand that your customer requires 8D format. It doesn't know the difference between a rework cost and a scrap cost in your specific costing structure. What you get here is the context layer — how to apply AI tools to manufacturing workflows specifically, with prompts and templates already built for your role. Going it alone with ChatGPT is like having a very smart intern who's never been in a factory. Useful, but limited. We fill that gap.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q">I'm a full-time executive. How much time does this actually take?</div>
+    <div class="faq-a">We designed this for people with full-time manufacturing jobs. Realistically: 30–45 minutes a week is enough to make steady progress. The tutorials are structured to get you to a usable result in one sitting. The community is asynchronous — post a question when you have it, check back when you can. If you have 30 minutes on a Sunday evening, that's enough.</div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final-cta">
+  <h2>You're Already Doing the Work.<br>Now Let's Make the Work Do Itself.</h2>
+  <p>You didn't spend 10+ years in manufacturing to spend your days copying data between spreadsheets. You have real expertise — commercial judgment, quality systems knowledge, production logic that took years to develop. That expertise is exactly what makes you dangerous when you pair it with AI.</p>
+  <a href="#pricing" class="simple-button" style="font-size: 1.15rem; padding: 1rem 2.5rem; display: inline-block; text-decoration: none;">Claim My Founding Member Spot — RM 89/month</a>
+  <p class="final-note">No pressure. No hard sell. The founding rate is here because we believe in building with the right people first.<br>If that's you, welcome. If the timing's not right, the door stays open.</p>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-content">
+    <div class="footer-section">
+      <h4>The Industrial Scribe</h4>
+      <p style="color: var(--text-light); font-size: 0.95rem; line-height: 1.7;">AI automation for manufacturing professionals.<br>Built from the shop floor up.</p>
+    </div>
+    <div class="footer-section">
+      <h4>Learn More</h4>
+      <ul>
+        <li><a href="#how">How It Works</a></li>
+        <li><a href="#learn">What You'll Learn</a></li>
+        <li><a href="#pricing">Pricing</a></li>
+      </ul>
+    </div>
+    <div class="footer-section">
+      <h4>Community</h4>
+      <ul>
+        <li><a href="#pricing">Join Now</a></li>
+        <li><a href="#faq">FAQ</a></li>
+      </ul>
+    </div>
+    <div class="footer-section">
+      <h4>Contact</h4>
+      <ul>
+        <li><a href="mailto:hello@theindustrialscribe.com">hello@theindustrialscribe.com</a></li>
+        <li><a href="#">Instagram</a></li>
+        <li><a href="#">YouTube</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; 2026 The Industrial Scribe &nbsp;·&nbsp; <a href="#">Terms</a> &nbsp;·&nbsp; <a href="#">Privacy</a></p>
+  </div>
+</footer>
+
+</body>
+</html>
